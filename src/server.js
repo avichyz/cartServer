@@ -10,7 +10,8 @@ const express = require('express'),
   bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ type: 'application/*+json' }))
+//app.use(bodyParser.json({ type: 'application/*+json' }))
+app.use(bodyParser.json());
 
 
 // enabling cors -> is this sufficient? 
@@ -25,6 +26,7 @@ app.use((req, res, next) => {
   //res.header('Access-Control-Allow-Headers', 'Content-Type, X-PINGOTHER, Access-Control-Allow-Origin, credentials');
   
   res.header('Content-Type', 'text/plain')
+  //res.header('Content-Type', 'application/json')
   //res.write('you posted:\n')
   //res.json(req.body)
   //res.render(JSON.stringify(req.body, null, 2)) 

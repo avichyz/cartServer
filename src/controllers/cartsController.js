@@ -35,6 +35,7 @@ exports.getCart = function (req, res) {
 exports.updateCart = function (req, res) {
     CartsSchema.findOneAndUpdate({ _id: req.params.cartId }, req.body, { new: true },
         function (err, cart) {
+            console.log(cart)
             if (err) res.send(err);
             res.json(cart);
         });
