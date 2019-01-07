@@ -19,9 +19,31 @@ exports.saveCart = function (req, res) {
                     'Path `name` is required.');
                 res.send(err);
             }
+        });
+    res.json(cart);
+}
+
+
+exports.saveAndUpdateCartPost = function (req, res) {
+    CartsSchema.findOneAndUpdate({ cartId: req.body.cartId }, req.body, { new: true },
+        function (err, cart) {
+            // if the function found no cart, create one
+            if (!cart) {
+                let newCart = new CartsSchema(req.body);
+                newCart.save(
+                    function (err, cart) {
+                        if (err) {
+                            assert.equal(err.errors['name'].message,
+                                'Path `name` is required.');
+                            res.send(err);
+                        }
+                    });
+            }
+
             res.json(cart);
         });
-};
+    ;
+}
 
 
 exports.getCart = function (req, res) {
@@ -31,6 +53,16 @@ exports.getCart = function (req, res) {
             res.json(cart);
         });
 };
+
+exports.updateCartPost = function (req, res) {
+    CartsSchema.findOneAndUpdate({ cartId: req.params.cartId }, req.body, { new: true },
+        function (err, cart) {
+            console.log(cart)
+            if (err) res.send(err);
+            res.json(cart);
+        });
+    ;
+}
 
 exports.updateCart = function (req, res) {
     CartsSchema.findOneAndUpdate({ _id: req.params.cartId }, req.body, { new: true },

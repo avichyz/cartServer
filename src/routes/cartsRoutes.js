@@ -6,10 +6,12 @@ module.exports = function (app) {
     // routes
     app.route('/carts')
         .get(cartsManager.getAllCarts)
-        .post(cartsManager.saveCart);
+        .post(cartsManager.saveAndUpdateCartPost);
+        // .post(cartsManager.saveCart);
 
     app.route('/carts/:cartId')
         .get(cartsManager.getCart)
-        .put(cartsManager.updateCart)
+        .post(cartsManager.updateCartPost)
+        // .put(cartsManager.updateCart)
         .delete(cartsManager.deleteCart)
 }
