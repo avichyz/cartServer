@@ -12,6 +12,6 @@ module.exports = function (app) {
     app.route('/carts/:cartId')
         .get(cartsManager.getCart)
         .post(cartsManager.updateCartPost)
-        // .put(cartsManager.updateCart)
+        .put(cartsManager.updateCart)
         .delete(cartsManager.deleteCart)
 }
